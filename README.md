@@ -1,73 +1,86 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Movie-Based Application with NestJS
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+This repository provides an example of building a movie-based application using NestJS, a powerful framework for building scalable and maintainable server-side applications with TypeScript. The application allows users to manage and interact with movie data through REST API endpoints and GraphQL.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Disclaimer
+- My docker is currently making me unavailable to run it so I haven't tested it yet. But this repository is having 0 errors with clear coding style.
 
-## Description
+## Prerequisites
+- Node.js and npm (or yarn) installed on your machine
+- Basic knowledge of TypeScript, NestJS, and database concepts
+- A working PostgreSQL database or Docker installed for running a containerized database
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Getting Started
+Follow the steps below to set up the project and run the application locally:
 
-## Installation
+### Step 1: Set up a NestJS project
+Install the NestJS CLI globally by running the command:
 
-```bash
-$ npm install
+npm install -g @nestjs/cli
+Create a new NestJS project by executing:
 ```
-
-## Running the app
-
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+nest new movie-app
 ```
-
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+Change into the project directory using:
 ```
+cd movie-app
+```
+### Step 2: Set up the database
+Ensure that you have PostgreSQL installed and running on your machine. Alternatively, you can install Docker and run a PostgreSQL container.
+Create a new PostgreSQL database for your application.
+Step 3: Set up TypeORM and create entities
+Install the required dependencies by running:
+```
+npm install typeorm pg
+```
+Configure the database connection in the ormconfig.json file.
+Create entity classes for the Movie, Favorite, and User models using decorators provided by TypeORM.
+### Step 4: Implement authentication using JWT and PassportJS
+Install the required dependencies by running:
+```
+npm install @nestjs/passport passport passport-local passport-jwt bcryptjs
+```
+Implement a User entity with necessary fields (e.g., username, password).
+Create an AuthService for handling authentication logic using JWT and PassportJS.
+Implement a local strategy and a JWT strategy for PassportJS.
+### Step 5: Implement REST API Endpoints
+Create controllers for movies, favorites, and users using NestJS decorators.
+Define the necessary routes and handlers for CRUD operations and any additional functionality required.
+Implement necessary services for handling business logic and interacting with the database.
+### Step 6: Set up an email service
+Install the required dependencies for email functionality by running:
+Copy code
+npm install nodemailer nodemailer-smtp-transport
+Configure the SMTP service, such as Ethereal Email (https://ethereal.email/), in the EmailService class.
+Implement methods in the EmailService class for sending emails for user registration, password reset, and email verification.
+### Step 7: Implement GraphQL (Bonus)
+Install the required dependencies by running:
+```
+npm install @nestjs/graphql graphql-tools graphql apollo-server-express
+```
+Create GraphQL schema and resolvers for movies, favorites, and users.
+Define the queries, mutations, and types as per your requirements.
 
-## Support
+### Step 8: Implement Docker Support
+Create a Dockerfile and a docker-compose.yml file in the root of your project.
+Configure the Dockerfile to build and run your NestJS application.
+Configure the docker-compose.yml file to run your NestJS application and a PostgreSQL container.
+### Step 9: Implement Tests (Bonus)
+Install the required dependencies for testing, such as Jest and any additional testing libraries, by running:
+```
+npm install --save-dev jest @types/jest
+```
+Currently only have testing code on movies.service.spec.ts, it is for unit tests as my docker is broken and unable to run it myself to try to do integration tests.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Run the tests using the 
+```npm test``` 
+or 
+```
+yarn test
+```
+command.
 
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+Start the application by running the following command:
+```
+npm run start:dev
+```
